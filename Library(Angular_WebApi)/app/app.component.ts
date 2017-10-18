@@ -8,16 +8,14 @@
                          <ul class='nav navbar-nav'>
                            <li><a [routerLink]="['home']">Home</a></li>
                            <li><a [routerLink]="['user']">Users Management</a></li>
-                      </ul>
+                           <li><a [routerLink]="['book']">Books</a></li>
+                         </ul>
                       </div>
                  </nav>    
               <div class='container'>
                 <router-outlet></router-outlet>
               </div>
              </div>          
-`
+                `
 })
-
-export class AppComponent {
-
-}
+export class AppComponent { }
