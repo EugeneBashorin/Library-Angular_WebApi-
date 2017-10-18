@@ -11,7 +11,6 @@ import { Global } from '../Shared/global';
 
 })
 export class BookComponent implements OnInit {
-
     @ViewChild('modal') modal: ModalComponent;
     books: IBook[];
     book: IBook;
@@ -21,6 +20,8 @@ export class BookComponent implements OnInit {
     dbops: DBOperation;
     modalTitle: string;
     modalBtnTitle: string;
+
+    listFilter: string;
 
     constructor(private fb: FormBuilder, private _bookService: BookService) { }
 
@@ -85,6 +86,12 @@ export class BookComponent implements OnInit {
         isEnable ? this.bookFrm.enable() : this.bookFrm.disable();
     }
 
+    //Metod for Publisher-filter
+    criteriaChange(value: string): void {
+        if (value != '[object Event]')
+            this.listFilter = value;
+    }
+
     onSubmit(formData: any) {
         this.msg = "";
 
@@ -102,6 +109,7 @@ export class BookComponent implements OnInit {
                         }
 
                         this.modal.dismiss();
+                        
                     },
                     error => {
                         this.msg = error;
@@ -138,8 +146,7 @@ export class BookComponent implements OnInit {
                         }
                         else {
                             this.msg = "There is some issue in get data, please contact to system administrator!"
-                        }
-
+                        }                        
                         this.modal.dismiss();
                     },
                     error => {

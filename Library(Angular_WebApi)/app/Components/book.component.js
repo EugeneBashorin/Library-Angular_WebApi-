@@ -75,6 +75,11 @@ var BookComponent = (function () {
     BookComponent.prototype.SetControlsState = function (isEnable) {
         isEnable ? this.bookFrm.enable() : this.bookFrm.disable();
     };
+    //Metod for Publisher-filter
+    BookComponent.prototype.criteriaChange = function (value) {
+        if (value != '[object Event]')
+            this.listFilter = value;
+    };
     BookComponent.prototype.onSubmit = function (formData) {
         var _this = this;
         this.msg = "";

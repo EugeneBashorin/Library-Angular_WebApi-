@@ -12,6 +12,7 @@ import { Global } from '../Shared/global';
 
 })
 export class UserComponent implements OnInit {
+    
     ngOnInit(): void {
         this.userFrm = this.fb.group({
             Id: [''],
@@ -60,6 +61,13 @@ export class UserComponent implements OnInit {
 
     SetControlsState(isEnable: boolean) {
         isEnable ? this.userFrm.enable() : this.userFrm.disable();
+    }
+
+
+    //ADD metod for bind filter
+    criteriaChange(value: string): void {
+        if (value != '[object Event]')
+            this.listFilter = value;
     }
 
     onSubmit(formData: any) {
@@ -136,6 +144,8 @@ export class UserComponent implements OnInit {
     dbops: DBOperation;
     modalTitle: string;
     modalBtnTitle: string;
+    // for filter
+    listFilter: string;
 
     constructor(private fb: FormBuilder, private _userService: UserService) { }
 }

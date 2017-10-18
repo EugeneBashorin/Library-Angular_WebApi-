@@ -65,6 +65,11 @@ var UserComponent = (function () {
     UserComponent.prototype.SetControlsState = function (isEnable) {
         isEnable ? this.userFrm.enable() : this.userFrm.disable();
     };
+    //ADD metod for bind filter
+    UserComponent.prototype.criteriaChange = function (value) {
+        if (value != '[object Event]')
+            this.listFilter = value;
+    };
     UserComponent.prototype.onSubmit = function (formData) {
         var _this = this;
         this.msg = "";
