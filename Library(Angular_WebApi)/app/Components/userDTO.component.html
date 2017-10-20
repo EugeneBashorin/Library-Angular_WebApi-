@@ -1,0 +1,41 @@
+﻿                      <div class='panel panel-primary'>
+                          <div class='panel-heading'>
+                              Users
+                          </div>
+                          <div class='panel-body'>
+                              <div class='table-responsive'>
+
+                                  <div class="alert alert-info" role="alert" *ngIf="indLoading">Loading...</div>
+                                  <div *ngIf='usersDto && usersDto.length==0' class="alert alert-info" role="alert">No record found!</div>
+                                  <table class='table table-striped' *ngIf='usersDto && usersDto.length'>
+                                      <thead>
+                                          <tr>
+                                              <th>Name</th>
+                                              <th>Email</th>
+                                              <th>Bann</th>
+                                              <th>UnBann</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          <tr *ngFor="let user of userDto">
+                                              <td>{{user.Name}}</td>
+                                              <td>{{user.Email}}</td>
+                                              <td>
+                                                  <button title="Delete" class="btn btn-danger" (click)="Bann(user.IsBanned)">Bann</button>
+                                              </td>
+                                              <td>
+                                                  <button title="Edit" class="btn btn-primary" (click)="Unbann(user.IsBanned)">Unbann</button>
+                                              </td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                                  <div></div>
+                              </div>
+                              <div *ngIf="msg" role="alert" class="alert alert-info alert-dismissible">
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                  <span class="sr-only">Error:</span>
+                                  {{msg}}
+                              </div>
+                          </div>
+                      </div>

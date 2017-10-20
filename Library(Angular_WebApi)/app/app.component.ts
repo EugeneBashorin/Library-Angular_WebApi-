@@ -1,4 +1,5 @@
-﻿import { Component } from "@angular/core"
+﻿import { Component } from "@angular/core";
+
 @Component({
     selector: "user-app",
     template: `
@@ -6,9 +7,8 @@
                   <nav class='navbar navbar-inverse'>
                        <div class='container-fluid'>
                          <ul class='nav navbar-nav'>
-                           <li><a [routerLink]="['home']">Home</a></li>
-                           <li><a [routerLink]="['user']">Users Management</a></li>
                            <li><a [routerLink]="['book']">Books</a></li>
+                           <li><a [routerLink]="['userDTO']">Users</a></li>
                          </ul>
                       </div>
                  </nav>    

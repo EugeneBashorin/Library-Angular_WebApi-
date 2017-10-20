@@ -6,9 +6,9 @@ import { IBook } from '../Models/book';
 import { DBOperation } from '../Shared/enum';
 import { Observable } from 'rxjs/Rx';
 import { Global } from '../Shared/global';
+
 @Component({
     templateUrl: 'app/Components/book.component.html'
-
 })
 export class BookComponent implements OnInit {
     @ViewChild('modal') modal: ModalComponent;

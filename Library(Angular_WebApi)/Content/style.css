@@ -1,0 +1,8 @@
+﻿.example-card {
+    width: 400px;
+}
+
+.example-header-image {
+    background-image: url('../images/users.png');
+    background-size: cover;
+}

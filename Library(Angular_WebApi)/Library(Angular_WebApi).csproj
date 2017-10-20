@@ -54,10 +54,31 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
@@ -66,6 +87,9 @@
     </Reference>
     <Reference Include="Ninject.Web.Mvc, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -174,11 +198,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseAPIController.cs" />
     <Compile Include="Controllers\BookAPIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserAPIController.cs" />
+    <Compile Include="Controllers\UserIdentityApiController.cs" />
     <Compile Include="DBContext\TblUSER.cs">
       <DependentUpon>UserDBEntities.tt</DependentUpon>
     </Compile>
@@ -200,6 +227,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\ManageUsersModel.cs" />
+    <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\NinjectDependencyResolver.cs" />
     <Compile Include="Util\NinjectDependencyScope.cs" />
@@ -207,12 +237,18 @@
   <ItemGroup>
     <Content Include="app\Components\book.component.html" />
     <Content Include="app\Components\user.component.html" />
+    <Content Include="app\Components\userDTO.component.html" />
+    <Content Include="app\filter\book.pipe.js" />
+    <Content Include="app\filter\user.pipe.js" />
+    <Content Include="app\Service\book.service.js" />
+    <Content Include="app\Service\user.service.js" />
     <Content Include="App_Data\UserDB.mdf" />
     <Content Include="App_Data\UserDB_log.ldf">
       <DependentUpon>UserDB.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\style.css" />
     <Content Include="DBContext\UserDBEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>UserDBEntities.Context.cs</LastGenOutput>
@@ -241,6 +277,11 @@
     <Content Include="DBContext\UserDBEntities.edmx.diagram">
       <DependentUpon>UserDBEntities.edmx</DependentUpon>
     </Content>
+    <Content Include="app\filter\book.pipe.js.map" />
+    <Content Include="app\filter\user.pipe.js.map" />
+    <Content Include="app\Service\book.service.js.map" />
+    <Content Include="app\Service\user.service.js.map" />
+    <Content Include="app\testUserData.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -268,9 +309,12 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="tsconfig.json" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Folder Include="Views\UserIdentity\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -290,28 +334,13 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="app\app.component.ts" />
-    <TypeScriptCompile Include="app\app.module.ts" />
-    <TypeScriptCompile Include="app\app.routing.ts" />
-    <TypeScriptCompile Include="app\Components\book.component.ts" />
-    <TypeScriptCompile Include="app\Components\home.component.ts" />
-    <TypeScriptCompile Include="app\Components\user.component.ts" />
-    <TypeScriptCompile Include="app\filter\book.pipe.ts" />
-    <TypeScriptCompile Include="app\filter\user.pipe.ts" />
-    <TypeScriptCompile Include="app\main.ts" />
-    <TypeScriptCompile Include="app\Models\book.ts" />
-    <TypeScriptCompile Include="app\Models\user.ts" />
-    <TypeScriptCompile Include="app\Service\book.service.ts" />
-    <TypeScriptCompile Include="app\Service\user.service.ts" />
-    <TypeScriptCompile Include="app\shared\enum.ts" />
-    <TypeScriptCompile Include="app\shared\global.ts" />
-    <TypeScriptCompile Include="app\shared\search.component.ts" />
-    <TypeScriptCompile Include="app\shared\searchPublisher.component.ts" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\Library%28EF_WebApi_Angular4%29\BusinessLogicLayer\BusinessLogicLayer.csproj">
       <Project>{271D2AD5-57AF-4383-B8F8-5924481DB2D0}</Project>
       <Name>BusinessLogicLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Library%28EF_WebApi_Angular4%29\ConfigurationData\ConfigurationData.csproj">
+      <Project>{0822C836-933A-4B24-8A7F-964B39C72601}</Project>
+      <Name>ConfigurationData</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Library%28EF_WebApi_Angular4%29\DataAccessLayer\DataAccessLayer.csproj">
       <Project>{5D957463-D349-4ABC-8F1F-3C6C770940CF}</Project>
@@ -321,6 +350,28 @@
       <Project>{A3D4F3C3-B33A-4D71-BF7D-CE68DC5AB9E1}</Project>
       <Name>Entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="app\app.component.ts" />
+    <TypeScriptCompile Include="app\app.module.ts" />
+    <TypeScriptCompile Include="app\app.routing.ts" />
+    <TypeScriptCompile Include="app\Components\book.component.ts" />
+    <TypeScriptCompile Include="app\Components\home.component.ts" />
+    <TypeScriptCompile Include="app\Components\user.component.ts" />
+    <TypeScriptCompile Include="app\Components\userDTO.component.ts" />
+    <TypeScriptCompile Include="app\filter\book.pipe.ts" />
+    <TypeScriptCompile Include="app\filter\user.pipe.ts" />
+    <TypeScriptCompile Include="app\main.ts" />
+    <TypeScriptCompile Include="app\Models\book.ts" />
+    <TypeScriptCompile Include="app\Models\user.ts" />
+    <TypeScriptCompile Include="app\Models\userDTO.ts" />
+    <TypeScriptCompile Include="app\Service\book.service.ts" />
+    <TypeScriptCompile Include="app\Service\user.service.ts" />
+    <TypeScriptCompile Include="app\Service\userDto.service.ts" />
+    <TypeScriptCompile Include="app\shared\enum.ts" />
+    <TypeScriptCompile Include="app\shared\global.ts" />
+    <TypeScriptCompile Include="app\shared\search.component.ts" />
+    <TypeScriptCompile Include="app\shared\searchPublisher.component.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
